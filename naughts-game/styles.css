@@ -1,0 +1,146 @@
+body {
+    background-color: #03442B;
+    /* color: #FFF5EE;     */
+    margin: auto;              
+}
+
+
+#borderimg {
+    padding-bottom: 20px;
+    border: 50px solid transparent;
+    background: url("border.png") no-repeat center;
+    background-size: 600px;
+    display: flex;              
+    align-items: center;        
+    justify-content: center;    
+    text-align: center;         
+}
+
+
+@font-face {
+    font-family: BuhunRetro; 
+    src: url(./custom-fonts/Buhun-Retro-Three.otf);
+}
+@font-face {
+    font-family: DefkinsAir; 
+    src: url(./custom-fonts/Defkins-Air.ttf);
+}
+@font-face {
+    font-family: DefkinsPop; 
+    src: url(./custom-fonts/Defkins-Pop.ttf);
+}
+@font-face {
+    font-family: DefkinsRegular; 
+    src: url(./custom-fonts/Defkins.ttf);
+}
+@font-face {
+    font-family: EarlyQuake; 
+    src: url(./custom-fonts/Early-Quake.otf);
+}
+@font-face {
+    font-family: Bungee; 
+    src: url(./custom-fonts/Bungee-Regular.ttf);
+}
+@font-face {
+    font-family: BungeeTester; 
+    src: url(./custom-fonts/Bungee-Tester.pdf);
+}
+@font-face {
+    font-family: Rocher; 
+    src: url(./custom-fonts/RocherColor.ttf);
+}
+
+
+@font-palette-values --MyPalette {
+    font-family: "Rocher";
+    override-colors: 3 #FFF5EE, 0 #E37383;
+}
+
+
+h1 {
+    font-family: Rocher;
+    font-palette: --MyPalette;
+}
+
+
+#message {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFF5EE;
+    color: #03442B;
+    padding: 10px 20px;
+    border: 2px solid #E0BFB8;
+    display: none;
+    font-weight: bold;
+    border-radius: 5px;       
+}
+
+
+.grid div {
+    border: 2px solid #E0BFB8;
+    text-align: center;
+    line-height: 80px;
+    font-size: 80px;         
+    font-weight: bold;
+    display: flex;             
+    justify-content: center;   
+    align-items: center;  
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+
+.grid div:hover {
+    /* background-color: #E0BFB8; */
+    cursor: pointer;
+}
+
+
+.grid {
+    width: 390px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFF5EE;
+    color: #E0BFB8;
+    border: 2px solid #E0BFB8;
+    display: grid;
+    grid-template-columns: 130px 130px 130px;
+    grid-template-rows: 120px 120px 120px;
+    position: relative;
+}
+
+
+.grid div.pulse {
+    animation: pulseEffect 0.3s ease !important;
+}
+
+
+@keyframes pulseEffect {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+
+#restart {
+    transform: translateX(-50%);
+    background: #FFF5EE;
+    color: #03442B;
+    padding: 12px;
+    border: 2px solid #E0BFB8;
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 30px; 
+    text-align: center;
+    position: relative;
+    top: -45px;
+    margin-left: 1070px;
+}
+
+
+#restart:hover {
+    color: #03442B;
+    background: #E0BFB8;
+}
