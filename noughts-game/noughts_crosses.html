@@ -10,21 +10,40 @@
     
     <h1 id="borderimg">Noughts and Crosses!</h1>
 
+    <div id="playerInput">
+        <form id="playerForm">
+            Player X name:
+            <input type="text" id="playerXName" name="playerXName"> 
+            
+            <br> <br> 
+
+            Player O name:
+            <input  type="text" id="playerOName" name="playerOName">
+            
+             <br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
     <div id="scoreboard">
         <div id="scoreboardHeader">Score</div>
 
         <div class="score">
             <span>❌</span>
-            <input type="text" id="playerOName" placeholder="Enter X player"/>
+            <p id="playerXLabel">Player X</p>
             <span id="scoreX">0</span>
         </div>
 
         <div class="score">
             <span>⭕</span>
-            <input type="text" id="playerXName" placeholder="Enter O player"/>
+            <p id="playerOLabel">Player O</p>
             <span id="scoreO">0</span>
         </div>
-        <button id="clearScore" onclick="clearScores()">Clear Scores</button>
+        <div class="score-buttons">
+            <button id="resetScore" onclick="resetScore()">Reset</button>
+            <button id="changePlayersBtn">Change Players</button>
+        </div>
     </div>
     
     <div class="grid">

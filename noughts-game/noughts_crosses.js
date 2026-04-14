@@ -3,14 +3,13 @@
 var currentPlayer = "O";
 var won = false;
 
+let popup, scoreboard, header;
+
 let scoreX = localStorage.getItem("scoreX") || 0;
 let scoreO = localStorage.getItem("scoreO") || 0;
 
-scoreX = parseInt(scoreX);
-scoreO = parseInt(scoreO);
-
-const scoreboard = document.getElementById("scoreboard");
-const header = document.getElementById("scoreboardHeader");
+scoreX = Number(scoreX);
+scoreO = Number(scoreO);
 
 let offsetX = 0;
 let offsetY = 0;
@@ -18,13 +17,87 @@ let isDragging = false;
 
 
 // Functions
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("playerForm")
+        .addEventListener("submit", showName);
+
+    scoreboard = document.getElementById("scoreboard");
+    header = document.getElementById("scoreboardHeader");
+    popup = document.getElementById("playerInput");
+
+    const savedX = localStorage.getItem("playerXName");
+    const savedO = localStorage.getItem("playerOName");
+
+    loadPlayerNames(); // always update scoreboard
+    updateScoreboard(); 
+
+    if (!savedX || !savedO) {
+        playerNameInput(); // only show popup if needed
+    }
+
+    document.getElementById("changePlayersBtn")
+        .addEventListener("click", playerNameInput);
+
+    header.addEventListener("mousedown", startDrag);
+    document.addEventListener("mousemove", drag);
+    document.addEventListener("mouseup", stopDrag);
+});
+
+
+function playerNameInput() {
+    const savedX = localStorage.getItem("playerXName") || "";
+    const savedO = localStorage.getItem("playerOName") || "";
+
+    document.getElementById("playerXName").value = savedX;
+    document.getElementById("playerOName").value = savedO;
+
+    popup.classList.add("open-popup");
+}
+
+
+function closePopup() {
+    popup.classList.remove("open-popup");
+}
+
+
+function showName(e){
+    e.preventDefault();
+
+    var playerX = document.getElementById("playerXName").value || "Player X";
+    var playerO = document.getElementById("playerOName").value || "Player O";
+
+    document.getElementById("playerXLabel").textContent = playerX;
+    document.getElementById("playerOLabel").textContent = playerO;
+
+    localStorage.setItem("playerXName", playerX);
+    localStorage.setItem("playerOName", playerO);
+
+    closePopup();
+}
+
+
+function loadPlayerNames() {
+    const playerX = localStorage.getItem("playerXName") || "Player X";
+    const playerO = localStorage.getItem("playerOName") || "Player O";
+
+    document.getElementById("playerXLabel").textContent = playerX;
+    document.getElementById("playerOLabel").textContent = playerO;
+}
+
 
 function updateScoreboard() {
-    document.getElementById("scoreX").textContent = scoreX;
-    document.getElementById("scoreO").textContent = scoreO;
+    document.getElementById("scoreX").textContent = scoreX;      //finds X element and updates what user sees
+    document.getElementById("scoreO").textContent = scoreO;      //finds O element and updates what user sees
 
     localStorage.setItem("scoreX", scoreX);
     localStorage.setItem("scoreO", scoreO);
+}
+
+function resetScore() {
+    scoreX = 0;
+    scoreO = 0;
+
+    updateScoreboard();
 }
 
 
@@ -180,10 +253,6 @@ function fireworkConfetti() {
     }, 250);
 }
 
-
-header.addEventListener("mousedown", startDrag);
-document.addEventListener("mousemove", drag);
-document.addEventListener("mouseup", stopDrag);
 
 function startDrag(e) {
     isDragging = true;
