@@ -17,39 +17,9 @@ html {
 
 
 @font-face {
-    font-family: BuhunRetro; 
-    src: url(./custom-fonts/Buhun-Retro-Three.otf);
-}
-@font-face {
-    font-family: DefkinsAir; 
-    src: url(./custom-fonts/Defkins-Air.ttf);
-}
-@font-face {
-    font-family: DefkinsPop; 
-    src: url(./custom-fonts/Defkins-Pop.ttf);
-}
-@font-face {
-    font-family: DefkinsRegular; 
-    src: url(./custom-fonts/Defkins.ttf);
-}
-@font-face {
-    font-family: EarlyQuake; 
-    src: url(./custom-fonts/Early-Quake.otf);
-}
-@font-face {
-    font-family: Bungee; 
-    src: url(./custom-fonts/Bungee-Regular.ttf);
-}
-@font-face {
-    font-family: BungeeTester; 
-    src: url(./custom-fonts/Bungee-Tester.pdf);
-}
-@font-face {
     font-family: Rocher; 
     src: url(./custom-fonts/RocherColor.ttf);
 }
-
-
 @font-palette-values --MyPalette {
     font-family: "Rocher";
     override-colors: 3 #FFF5EE, 0 #E37383;
@@ -160,7 +130,7 @@ h1 {
     transform: translateY(-50%);
 
     width: 180px;
-    padding: 20px;
+    padding: 15px;
 
     background: #FFF5EE;
     color: #03442B;
@@ -187,11 +157,23 @@ h1 {
     cursor: grab; /* indicates this is the drag handle */
 }
 
+.score input {
+    width: 110px;       /* adjust as you like */
+    padding: 4px;
+    margin-left: 1px;
+}
+
 .score {
     display: flex;
+    align-items: center;
+    margin-left: -9px;
+    margin-bottom: 10px;
+    font-size: 16px;
     justify-content: space-between;
-    margin: 10px 0;
-    font-size: 18px;
+}
+
+#scoreX, #scoreO {
+    margin-left: auto;
 }
 
 @media (max-width: 900px) {
@@ -201,7 +183,6 @@ h1 {
         left: 1vw;
     }
 }
-
 
 #clearScore {
     background: #eee;

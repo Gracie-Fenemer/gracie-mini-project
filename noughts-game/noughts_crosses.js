@@ -1,3 +1,5 @@
+// Variables
+
 var currentPlayer = "O";
 var won = false;
 
@@ -7,6 +9,15 @@ let scoreO = localStorage.getItem("scoreO") || 0;
 scoreX = parseInt(scoreX);
 scoreO = parseInt(scoreO);
 
+const scoreboard = document.getElementById("scoreboard");
+const header = document.getElementById("scoreboardHeader");
+
+let offsetX = 0;
+let offsetY = 0;
+let isDragging = false;
+
+
+// Functions
 
 function updateScoreboard() {
     document.getElementById("scoreX").textContent = scoreX;
@@ -170,13 +181,6 @@ function fireworkConfetti() {
 }
 
 
-const scoreboard = document.getElementById("scoreboard");
-const header = document.getElementById("scoreboardHeader");
-
-let offsetX = 0;
-let offsetY = 0;
-let isDragging = false;
-
 header.addEventListener("mousedown", startDrag);
 document.addEventListener("mousemove", drag);
 document.addEventListener("mouseup", stopDrag);
@@ -204,32 +208,4 @@ function stopDrag() {
 }
 
 
-// // Confetti effect
-//     const restartBtn = document.getElementById("restart");
-//     const colors = ["#FFF5EE", "#E0BFB8", "#FAA0A0", "#E37383"];
-    
-//     for (let i = 0; i < 50; i++) {
-//         const confetti = document.createElement('div');
-//         const color = colors[Math.floor(Math.random() * colors.length)];
-//         confetti.classList.add('confetti'); // optional class if you want CSS styling
-//         confetti.style.background = color;
-//         confetti.style.boxShadow = `0 0 2px 1.5px ${color}`; // glow
-//         confetti.style.position = 'absolute';
-//         confetti.style.width = '8px';
-//         confetti.style.height = '8px';
-//         confetti.style.borderRadius = '50%';
-//         confetti.style.top = `${restartBtn.offsetTop}px`;
-//         confetti.style.left = `${restartBtn.offsetLeft + restartBtn.offsetWidth/2}px`;
-//         confetti.style.opacity = 1;
-//         confetti.style.transition = 'all 1s ease-out';
-//         document.body.appendChild(confetti);
 
-//         // Animate confetti to random positions
-//         setTimeout(() => {
-//             confetti.style.top = `${Math.random() * window.innerHeight}px`;
-//             confetti.style.left = `${Math.random() * window.innerWidth}px`;
-//         }, 10);
-
-//         // Remove confetti after 1 second
-//         setTimeout(() => confetti.remove(), 1000);
-//     }
