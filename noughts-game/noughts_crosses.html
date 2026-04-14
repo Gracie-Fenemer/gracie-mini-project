@@ -9,6 +9,21 @@
 <body>
     
     <h1 id="borderimg">Noughts and Crosses!</h1>
+
+    <div id="scoreboard">
+        <div id="scoreboardHeader">Score</div>
+
+        <div class="score">
+            <span>❌ Player X:</span>
+            <span id="scoreX">0</span>
+        </div>
+
+        <div class="score">
+            <span>⭕ Player O:</span>
+            <span id="scoreO">0</span>
+        </div>
+        <button id="clearScore" onclick="clearScores()">Clear Scores</button>
+    </div>
     
     <div class="grid">
         <div id="0_0" onclick="place(this)"></div>

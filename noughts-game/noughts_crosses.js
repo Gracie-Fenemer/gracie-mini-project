@@ -1,6 +1,21 @@
 var currentPlayer = "O";
 var won = false;
 
+let scoreX = localStorage.getItem("scoreX") || 0;
+let scoreO = localStorage.getItem("scoreO") || 0;
+
+scoreX = parseInt(scoreX);
+scoreO = parseInt(scoreO);
+
+
+function updateScoreboard() {
+    document.getElementById("scoreX").textContent = scoreX;
+    document.getElementById("scoreO").textContent = scoreO;
+
+    localStorage.setItem("scoreX", scoreX);
+    localStorage.setItem("scoreO", scoreO);
+}
+
 
 function place(box) {
     if(box.innerText != "" || won) return;
@@ -47,14 +62,28 @@ function checkGameBoard() {
 
 
 function checkWinner(first, second, third) {
-    if(first != "" && first == second && first == third) {
-        alert("The winner is... " + first + "! Winner winner chicken dinner!");
+    if (won) return; // prevents double scoring
+
+    if (first != "" && first == second && first == third) {
+
         won = true;
 
-        // 🎉 Confetti on win
+        alert("The winner is... " + first + "! Winner winner chicken dinner!");
+
+        // 🏆 update score based on winner
+        if (first === "X") {
+            scoreX++;
+            updateScoreboard();
+        } else if (first === "O") {
+            scoreO++;
+            updateScoreboard();
+        }
+
+        // 🎉 confetti
         fireworkConfetti();
     }
 }
+
 
 function checkDraw() {
     if (won) return; // don't show draw if someone already won
@@ -141,7 +170,38 @@ function fireworkConfetti() {
 }
 
 
+const scoreboard = document.getElementById("scoreboard");
+const header = document.getElementById("scoreboardHeader");
 
+let offsetX = 0;
+let offsetY = 0;
+let isDragging = false;
+
+header.addEventListener("mousedown", startDrag);
+document.addEventListener("mousemove", drag);
+document.addEventListener("mouseup", stopDrag);
+
+function startDrag(e) {
+    isDragging = true;
+
+    const rect = scoreboard.getBoundingClientRect();
+
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+}
+
+function drag(e) {
+    if (!isDragging) return;
+
+    scoreboard.style.left = (e.clientX - offsetX) + "px";
+    scoreboard.style.top = (e.clientY - offsetY) + "px";
+
+    scoreboard.style.transform = "none"; // cancel centering
+}
+
+function stopDrag() {
+    isDragging = false;
+}
 
 
 // // Confetti effect

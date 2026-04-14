@@ -1,7 +1,6 @@
-body {
-    background-color: #03442B;
-    /* color: #FFF5EE;     */
-    margin: auto;              
+html {
+    background: linear-gradient(183deg, #03442b 0%, #b4dcc8 100%);
+    height: 100%;
 }
 
 
@@ -125,22 +124,90 @@ h1 {
 
 
 #restart {
-    transform: translateX(-50%);
+    position: fixed;  
+    bottom: 9vh;       
+    right: 10vw;        
+
     background: #FFF5EE;
     color: #03442B;
-    padding: 12px;
+    padding: 0.8em 1.5em;
     border: 2px solid #E0BFB8;
     display: inline-block;
     font-weight: bold;
-    border-radius: 30px; 
+    border-radius: 30px;
     text-align: center;
-    position: relative;
-    top: -45px;
-    margin-left: 1070px;
+}
+
+/* When screen gets smaller */
+@media (max-width: 900px) {
+    #restart {
+        right: 1vw;   
+        bottom: 2vh;  
+    }
 }
 
 
 #restart:hover {
     color: #03442B;
     background: #E0BFB8;
+}
+
+
+#scoreboard {
+    position: fixed;
+    left: 2vw;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 180px;
+    padding: 20px;
+
+    background: #FFF5EE;
+    color: #03442B;
+    border: 2px solid #E0BFB8;
+    border-radius: 10px;
+
+    font-family: "Comic Sans MS", cursive; /* chalk vibe */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+
+    cursor: grab;            /* 👈 shows draggable feel */
+    user-select: none;       /* 👈 prevents text highlighting while dragging */
+    touch-action: none;      /* 👈 improves mobile dragging later */
+}
+
+#scoreboard:active {
+    cursor: grabbing;
+}
+
+#scoreboardHeader {
+    text-align: center;
+    margin-bottom: 15px;
+    text-decoration: underline;
+
+    cursor: grab; /* indicates this is the drag handle */
+}
+
+.score {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+@media (max-width: 900px) {
+    #scoreboard {
+        width: 140px;
+        font-size: 14px;
+        left: 1vw;
+    }
+}
+
+
+#clearScore {
+    background: #eee;
+    color: #03442B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
