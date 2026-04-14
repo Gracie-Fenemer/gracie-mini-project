@@ -199,7 +199,7 @@ h1 {
     border: 2px solid #E0BFB8;
     border-radius: 10px;
 
-    font-family: "Comic Sans MS", cursive; /* chalk vibe */
+    font-family: "Comic Sans MS", cursive;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 
     cursor: grab;            

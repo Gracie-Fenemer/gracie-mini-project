@@ -1,25 +1,34 @@
-// Variables
+// =========================
+// GAME VARIABLES
+// =========================
+let currentPlayer = "O";
+let won = false;
 
-var currentPlayer = "O";
-var won = false;
+let scoreX = Number(localStorage.getItem("scoreX")) || 0;
+let scoreO = Number(localStorage.getItem("scoreO")) || 0;
 
-let popup, scoreboard, header;
 
-let scoreX = localStorage.getItem("scoreX") || 0;
-let scoreO = localStorage.getItem("scoreO") || 0;
+// =========================
+// UI ELEMENT VARIABLES
+// =========================
+let popup;
+let scoreboard;
+let header;
 
-scoreX = Number(scoreX);
-scoreO = Number(scoreO);
 
+// =========================
+// DRAG VARIABLES
+// =========================
 let offsetX = 0;
 let offsetY = 0;
 let isDragging = false;
 
 
-// Functions
+// =========================
+// PAGE SETUP / EVENT LISTENERS
+// =========================
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("playerForm")
-        .addEventListener("submit", showName);
+    document.getElementById("playerForm").addEventListener("submit", savePlayerNames);
 
     scoreboard = document.getElementById("scoreboard");
     header = document.getElementById("scoreboardHeader");
@@ -28,15 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedX = localStorage.getItem("playerXName");
     const savedO = localStorage.getItem("playerOName");
 
-    loadPlayerNames(); // always update scoreboard
-    updateScoreboard(); 
+    loadPlayerNames();
+    updateScoreboard();
 
     if (!savedX || !savedO) {
-        playerNameInput(); // only show popup if needed
+        playerNameInput();
     }
 
-    document.getElementById("changePlayersBtn")
-        .addEventListener("click", playerNameInput);
+    document.getElementById("changePlayersBtn").addEventListener("click", playerNameInput);
 
     header.addEventListener("mousedown", startDrag);
     document.addEventListener("mousemove", drag);
@@ -44,6 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// =========================
+// PLAYER NAME / POPUP FUNCTIONS
+// =========================
 function playerNameInput() {
     const savedX = localStorage.getItem("playerXName") || "";
     const savedO = localStorage.getItem("playerOName") || "";
@@ -54,17 +65,15 @@ function playerNameInput() {
     popup.classList.add("open-popup");
 }
 
-
 function closePopup() {
     popup.classList.remove("open-popup");
 }
 
-
-function showName(e){
+function savePlayerNames(e) {
     e.preventDefault();
 
-    var playerX = document.getElementById("playerXName").value || "Player X";
-    var playerO = document.getElementById("playerOName").value || "Player O";
+    const playerX = document.getElementById("playerXName").value || "Player X";
+    const playerO = document.getElementById("playerOName").value || "Player O";
 
     document.getElementById("playerXLabel").textContent = playerX;
     document.getElementById("playerOLabel").textContent = playerO;
@@ -75,7 +84,6 @@ function showName(e){
     closePopup();
 }
 
-
 function loadPlayerNames() {
     const playerX = localStorage.getItem("playerXName") || "Player X";
     const playerO = localStorage.getItem("playerOName") || "Player O";
@@ -85,9 +93,12 @@ function loadPlayerNames() {
 }
 
 
+// =========================
+// SCOREBOARD FUNCTIONS
+// =========================
 function updateScoreboard() {
-    document.getElementById("scoreX").textContent = scoreX;      //finds X element and updates what user sees
-    document.getElementById("scoreO").textContent = scoreO;      //finds O element and updates what user sees
+    document.getElementById("scoreX").textContent = scoreX;
+    document.getElementById("scoreO").textContent = scoreO;
 
     localStorage.setItem("scoreX", scoreX);
     localStorage.setItem("scoreO", scoreO);
@@ -101,60 +112,77 @@ function resetScore() {
 }
 
 
+// =========================
+// GAMEPLAY FUNCTIONS
+// =========================
 function place(box) {
-    if(box.innerText != "" || won) return;
+    if (box.innerText !== "" || won) return;
 
     box.innerText = currentPlayer;
 
-    // Trigger pulse animation
     box.classList.add("pulse");
-    setTimeout(() => box.classList.remove("pulse"), 400); // remove after animation
+    setTimeout(() => box.classList.remove("pulse"), 400);
 
-    currentPlayer == "O" ? 
-    currentPlayer = "X" : 
-    currentPlayer = "O";
-    checkGameBoard();   
+    currentPlayer = currentPlayer === "O" ? "X" : "O";
+
+    checkGameBoard();
     checkDraw();
+    showNextPlayerMessage();
+}
 
-    // Show the "Next player!" message
-    const msg = document.getElementById("message");
-    msg.style.display = "block";
+function restartGame() {
+    currentPlayer = "O";
+    won = false;
 
-    // Hide it after 5 seconds
-    setTimeout(() => {
-        msg.style.display = "none";
-    }, 1000);
-}    
-
-
-function checkGameBoard() {
-    for(var i = 0; i <= 2; i++) {
-        checkWinner(document.getElementById(i + "_0").innerText,
-            document.getElementById(i + "_1").innerText,
-            document.getElementById(i + "_2").innerText);
-        checkWinner(document.getElementById("0_" + i).innerText,
-            document.getElementById("1_" + i).innerText,
-            document.getElementById("2_" + i).innerText);
+    for (let i = 0; i <= 2; i++) {
+        for (let j = 0; j <= 2; j++) {
+            document.getElementById(i + "_" + j).innerText = "";
+        }
     }
-        checkWinner(document.getElementById("0_0").innerText,
-            document.getElementById("1_1").innerText,
-            document.getElementById("2_2").innerText);
-        checkWinner(document.getElementById("0_2").innerText,
-            document.getElementById("1_1").innerText,
-            document.getElementById("2_0").innerText);
+
+    document.getElementById("message").style.display = "none";
 }
 
 
+// =========================
+// WIN / DRAW CHECKING
+// =========================
+function checkGameBoard() {
+    for (let i = 0; i <= 2; i++) {
+        checkWinner(
+            document.getElementById(i + "_0").innerText,
+            document.getElementById(i + "_1").innerText,
+            document.getElementById(i + "_2").innerText
+        );
+
+        checkWinner(
+            document.getElementById("0_" + i).innerText,
+            document.getElementById("1_" + i).innerText,
+            document.getElementById("2_" + i).innerText
+        );
+    }
+
+    checkWinner(
+        document.getElementById("0_0").innerText,
+        document.getElementById("1_1").innerText,
+        document.getElementById("2_2").innerText
+    );
+
+    checkWinner(
+        document.getElementById("0_2").innerText,
+        document.getElementById("1_1").innerText,
+        document.getElementById("2_0").innerText
+    );
+}
+
 function checkWinner(first, second, third) {
-    if (won) return; // prevents double scoring
+    if (won) return;
 
-    if (first != "" && first == second && first == third) {
-
+    if (first !== "" && first === second && first === third) {
         won = true;
 
         alert("The winner is... " + first + "! Winner winner chicken dinner!");
 
-        // 🏆 update score based on winner
         if (first === "X") {
             scoreX++;
             updateScoreboard();
@@ -163,14 +191,12 @@ function checkWinner(first, second, third) {
             updateScoreboard();
         }
 
-        // 🎉 confetti
         fireworkConfetti();
     }
 }
 
-
 function checkDraw() {
-    if (won) return; // don't show draw if someone already won
+    if (won) return;
 
     let isFull = true;
 
@@ -186,30 +212,31 @@ function checkDraw() {
         alert("It's a draw... Rematch?");
     }
 }
-    
 
-function restartGame() {
-    currentPlayer = "O";
-    won = false;
 
-    // Clear grid
-    for (var i = 0; i <= 2; i++) {
-        for (var j = 0; j <= 2; j++) {
-            document.getElementById(i + "_" + j).innerText = "";
-        }
-    }
+// =========================
+// MESSAGE FUNCTIONS
+// =========================
+function showNextPlayerMessage() {
     const msg = document.getElementById("message");
-    msg.style.display = "none";
+    msg.style.display = "block";
+
+    setTimeout(() => {
+        msg.style.display = "none";
+    }, 1000);
 }
 
 
+// =========================
+// CONFETTI FUNCTIONS
+// =========================
 function fireworkConfetti() {
-    var duration = 2 * 1000;
-    var animationEnd = Date.now() + duration;
+    const duration = 2 * 1000;
+    const animationEnd = Date.now() + duration;
 
     const colors = ["#FFF5EE", "#E0BFB8", "#FAA0A0", "#E37383"];
 
-    var defaults = {
+    const defaults = {
         startVelocity: 30,
         spread: 360,
         ticks: 60,
@@ -221,16 +248,16 @@ function fireworkConfetti() {
         return Math.random() * (max - min) + min;
     }
 
-    var interval = setInterval(function () {
-        var timeLeft = animationEnd - Date.now();
+    const interval = setInterval(function () {
+        const timeLeft = animationEnd - Date.now();
 
         if (timeLeft <= 0) {
-            return clearInterval(interval);
+            clearInterval(interval);
+            return;
         }
 
-        var particleCount = 50 * (timeLeft / duration);
+        const particleCount = 50 * (timeLeft / duration);
 
-        // Left burst
         confetti({
             ...defaults,
             particleCount,
@@ -240,7 +267,6 @@ function fireworkConfetti() {
             }
         });
 
-        // Right burst
         confetti({
             ...defaults,
             particleCount,
@@ -249,16 +275,17 @@ function fireworkConfetti() {
                 y: Math.random() - 0.2
             }
         });
-
     }, 250);
 }
 
 
+// =========================
+// SCOREBOARD DRAG FUNCTIONS
+// =========================
 function startDrag(e) {
     isDragging = true;
 
     const rect = scoreboard.getBoundingClientRect();
-
     offsetX = e.clientX - rect.left;
     offsetY = e.clientY - rect.top;
 }
@@ -268,13 +295,9 @@ function drag(e) {
 
     scoreboard.style.left = (e.clientX - offsetX) + "px";
     scoreboard.style.top = (e.clientY - offsetY) + "px";
-
-    scoreboard.style.transform = "none"; // cancel centering
+    scoreboard.style.transform = "none";
 }
 
 function stopDrag() {
     isDragging = false;
 }
-
-
-
