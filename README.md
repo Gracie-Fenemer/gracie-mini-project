@@ -1,2 +1,2 @@
 # gracie-mini-project
-A repository where I plan to work on my mini project whilst on the CTA academy
+A repository where I'm working on my mini project's whilst training with CTA!
