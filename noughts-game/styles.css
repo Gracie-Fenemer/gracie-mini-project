@@ -1,21 +1,24 @@
-/* Background Styling */
+/* ========================== */
+/*        BG Styling          */
+/* ========================== */
+
 html {
     background: linear-gradient(183deg, #03442b 0%, #b4dcc8 100%);
     height: 100%;
 }
 
 
-
-/* ----------------------------------------------------------------------------------------- */
+/* ========================= */
 /* Player Name Input Styling */
+/* ========================= */
 
 #playerInput {
     width: 250px;
     height: 125px;
     background: #FFF5EE;
-    border-radius: 5px;       
+    border-radius: 5px;
     border: 2px solid #E0BFB8;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 
     position: absolute;
     top: 50%;
@@ -51,27 +54,27 @@ button[type="submit"] {
     margin: 8px auto;
     border: 1px ridge #03442B;
     cursor: pointer;
-    box-shadow: 0 5px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 
-
-/* ----------------------------------------------------------------------------------------- */
-/* Border/Header Styling */
+/* ========================= */
+/*   Border/Header Styling   */
+/* ========================= */
 
 #borderimg {
     padding-bottom: 20px;
     border: 50px solid transparent;
     background: url("border.png") no-repeat center;
     background-size: 600px;
-    display: flex;              
-    align-items: center;        
-    justify-content: center;    
-    text-align: center;         
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 @font-face {
-    font-family: Rocher; 
+    font-family: Rocher;
     src: url(./custom-fonts/RocherColor.ttf);
 }
 
@@ -86,9 +89,9 @@ h1 {
 }
 
 
-
-/* ----------------------------------------------------------------------------------------- */
-/* Game Grid Styling */
+/* ========================= */
+/*     Game Grid Styling     */
+/* ========================= */
 
 #message {
     position: fixed;
@@ -101,7 +104,7 @@ h1 {
     border: 2px solid #E0BFB8;
     display: none;
     font-weight: bold;
-    border-radius: 5px;       
+    border-radius: 5px;
 }
 
 .grid div {
@@ -109,11 +112,11 @@ h1 {
     border: 2px solid #E0BFB8;
     text-align: center;
     line-height: 80px;
-    font-size: 80px;         
+    font-size: 80px;
     font-weight: bold;
-    display: flex;             
-    justify-content: center;   
-    align-items: center;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: transform 0.2s, background-color 0.2s;
 }
 
@@ -141,20 +144,31 @@ h1 {
 }
 
 @keyframes pulseEffect {
-    0% { transform: scale(0.9); opacity: 0.8; }
-    50% { transform: scale(1.1); opacity: 1; }
-    100% { transform: scale(1); opacity: 1; }
+    0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 
-
-/* ----------------------------------------------------------------------------------------- */
-/* Restart button Styling */
+/* ========================= */
+/*  Restart button Styling   */
+/* ========================= */
 
 #restart {
-    position: fixed;  
-    bottom: 9vh;       
-    right: 10vw;        
+    position: fixed;
+    bottom: 9vh;
+    right: 10vw;
 
     background: #FFF5EE;
     color: #03442B;
@@ -169,8 +183,8 @@ h1 {
 /* When screen gets smaller */
 @media (max-width: 900px) {
     #restart {
-        right: 1vw;   
-        bottom: 2vh;  
+        right: 1vw;
+        bottom: 2vh;
     }
 }
 
@@ -180,9 +194,9 @@ h1 {
 }
 
 
-
-/* ----------------------------------------------------------------------------------------- */
-/* Scoreboard Styling */
+/* ========================= */
+/*    Scoreboard Styling     */
+/* ========================= */
 
 #scoreboard {
     position: fixed;
@@ -200,11 +214,11 @@ h1 {
     border-radius: 10px;
 
     font-family: "Comic Sans MS", cursive;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 
-    cursor: grab;            
-    user-select: none;       
-    touch-action: none;     
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
 }
 
 #scoreboard:active {
@@ -216,11 +230,11 @@ h1 {
     margin-bottom: 15px;
     text-decoration: underline;
 
-    cursor: grab; 
+    cursor: grab;
 }
 
 .score input {
-    width: 110px;       
+    width: 110px;
     padding: 4px;
     margin-left: 1px;
 }
@@ -234,7 +248,8 @@ h1 {
     justify-content: space-between;
 }
 
-#scoreX, #scoreO {
+#scoreX,
+#scoreO {
     margin-left: auto;
 }
 

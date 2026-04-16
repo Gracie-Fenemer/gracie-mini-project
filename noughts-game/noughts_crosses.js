@@ -1,9 +1,10 @@
 // =========================
 // GAME VARIABLES
 // =========================
-let currentPlayer = "O";
-let won = false;
+let currentPlayer = "O"; // current turn
+let won = false; // game state
 
+// get scores from storage (or 0)
 let scoreX = Number(localStorage.getItem("scoreX")) || 0;
 let scoreO = Number(localStorage.getItem("scoreO")) || 0;
 
@@ -11,41 +12,48 @@ let scoreO = Number(localStorage.getItem("scoreO")) || 0;
 // =========================
 // UI ELEMENT VARIABLES
 // =========================
-let popup;
-let scoreboard;
-let header;
+let popup; // player name popup
+let scoreboard; // scoreboard box
+let header; // draggable header
 
 
 // =========================
 // DRAG VARIABLES
 // =========================
-let offsetX = 0;
-let offsetY = 0;
-let isDragging = false;
+let offsetX = 0; // mouse offset X
+let offsetY = 0; // mouse offset Y
+let isDragging = false; // dragging state
 
 
 // =========================
 // PAGE SETUP / EVENT LISTENERS
 // =========================
 document.addEventListener("DOMContentLoaded", () => {
+
+    // form submit
     document.getElementById("playerForm").addEventListener("submit", savePlayerNames);
 
+    // get elements
     scoreboard = document.getElementById("scoreboard");
     header = document.getElementById("scoreboardHeader");
     popup = document.getElementById("playerInput");
 
+    // get saved names
     const savedX = localStorage.getItem("playerXName");
     const savedO = localStorage.getItem("playerOName");
 
-    loadPlayerNames();
-    updateScoreboard();
+    loadPlayerNames(); // load names
+    updateScoreboard(); // update scores
 
+    // show popup if no names saved
     if (!savedX || !savedO) {
         playerNameInput();
     }
 
+    // change players button
     document.getElementById("changePlayersBtn").addEventListener("click", playerNameInput);
 
+    // drag events
     header.addEventListener("mousedown", startDrag);
     document.addEventListener("mousemove", drag);
     document.addEventListener("mouseup", stopDrag);
@@ -56,28 +64,33 @@ document.addEventListener("DOMContentLoaded", () => {
 // PLAYER NAME / POPUP FUNCTIONS
 // =========================
 function playerNameInput() {
+
+    // load saved values into inputs
     const savedX = localStorage.getItem("playerXName") || "";
     const savedO = localStorage.getItem("playerOName") || "";
 
     document.getElementById("playerXName").value = savedX;
     document.getElementById("playerOName").value = savedO;
 
-    popup.classList.add("open-popup");
+    popup.classList.add("open-popup"); // show popup
 }
 
 function closePopup() {
-    popup.classList.remove("open-popup");
+    popup.classList.remove("open-popup"); // hide popup
 }
 
 function savePlayerNames(e) {
-    e.preventDefault();
+    e.preventDefault(); // stop reload
 
+    // get input values
     const playerX = document.getElementById("playerXName").value || "Player X";
     const playerO = document.getElementById("playerOName").value || "Player O";
 
+    // update labels
     document.getElementById("playerXLabel").textContent = playerX;
     document.getElementById("playerOLabel").textContent = playerO;
 
+    // save to storage
     localStorage.setItem("playerXName", playerX);
     localStorage.setItem("playerOName", playerO);
 
@@ -85,6 +98,8 @@ function savePlayerNames(e) {
 }
 
 function loadPlayerNames() {
+
+    // load names (or default)
     const playerX = localStorage.getItem("playerXName") || "Player X";
     const playerO = localStorage.getItem("playerOName") || "Player O";
 
@@ -97,9 +112,12 @@ function loadPlayerNames() {
 // SCOREBOARD FUNCTIONS
 // =========================
 function updateScoreboard() {
+
+    // update UI
     document.getElementById("scoreX").textContent = scoreX;
     document.getElementById("scoreO").textContent = scoreO;
 
+    // save scores
     localStorage.setItem("scoreX", scoreX);
     localStorage.setItem("scoreO", scoreO);
 }
@@ -116,31 +134,36 @@ function resetScore() {
 // GAMEPLAY FUNCTIONS
 // =========================
 function place(box) {
+
+    // ignore if filled or game ended
     if (box.innerText !== "" || won) return;
 
-    box.innerText = currentPlayer;
+    box.innerText = currentPlayer; // place move
 
+    // small animation
     box.classList.add("pulse");
     setTimeout(() => box.classList.remove("pulse"), 400);
 
+    // switch player
     currentPlayer = currentPlayer === "O" ? "X" : "O";
 
-    checkGameBoard();
-    checkDraw();
-    showNextPlayerMessage();
+    checkGameBoard(); // check win
+    checkDraw(); // check draw
+    showNextPlayerMessage(); // show message
 }
 
 function restartGame() {
-    currentPlayer = "O";
-    won = false;
+    currentPlayer = "O"; // reset player
+    won = false; // reset state
 
+    // clear board
     for (let i = 0; i <= 2; i++) {
         for (let j = 0; j <= 2; j++) {
             document.getElementById(i + "_" + j).innerText = "";
         }
     }
 
-    document.getElementById("message").style.display = "none";
+    document.getElementById("message").style.display = "none"; // hide message
 }
 
 
@@ -148,6 +171,8 @@ function restartGame() {
 // WIN / DRAW CHECKING
 // =========================
 function checkGameBoard() {
+
+    // check rows and columns
     for (let i = 0; i <= 2; i++) {
         checkWinner(
             document.getElementById(i + "_0").innerText,
@@ -162,6 +187,7 @@ function checkGameBoard() {
         );
     }
 
+    // check diagonals
     checkWinner(
         document.getElementById("0_0").innerText,
         document.getElementById("1_1").innerText,
@@ -176,13 +202,15 @@ function checkGameBoard() {
 }
 
 function checkWinner(first, second, third) {
-    if (won) return;
+    if (won) return; // stop if already won
 
+    // check match
     if (first !== "" && first === second && first === third) {
         won = true;
 
         alert("The winner is... " + first + "! Winner winner chicken dinner!");
 
+        // update score
         if (first === "X") {
             scoreX++;
             updateScoreboard();
@@ -191,7 +219,7 @@ function checkWinner(first, second, third) {
             updateScoreboard();
         }
 
-        fireworkConfetti();
+        fireworkConfetti(); // celebration
     }
 }
 
@@ -200,6 +228,7 @@ function checkDraw() {
 
     let isFull = true;
 
+    // check all cells
     for (let i = 0; i <= 2; i++) {
         for (let j = 0; j <= 2; j++) {
             if (document.getElementById(i + "_" + j).innerText === "") {
@@ -219,10 +248,11 @@ function checkDraw() {
 // =========================
 function showNextPlayerMessage() {
     const msg = document.getElementById("message");
-    msg.style.display = "block";
+
+    msg.style.display = "block"; // show
 
     setTimeout(() => {
-        msg.style.display = "none";
+        msg.style.display = "none"; // hide after delay
     }, 1000);
 }
 
@@ -231,7 +261,8 @@ function showNextPlayerMessage() {
 // CONFETTI FUNCTIONS
 // =========================
 function fireworkConfetti() {
-    const duration = 2 * 1000;
+
+    const duration = 2 * 1000; // 2 seconds
     const animationEnd = Date.now() + duration;
 
     const colors = ["#FFF5EE", "#E0BFB8", "#FAA0A0", "#E37383"];
@@ -249,6 +280,7 @@ function fireworkConfetti() {
     }
 
     const interval = setInterval(function () {
+
         const timeLeft = animationEnd - Date.now();
 
         if (timeLeft <= 0) {
@@ -258,6 +290,7 @@ function fireworkConfetti() {
 
         const particleCount = 50 * (timeLeft / duration);
 
+        // left side
         confetti({
             ...defaults,
             particleCount,
@@ -267,6 +300,7 @@ function fireworkConfetti() {
             }
         });
 
+        // right side
         confetti({
             ...defaults,
             particleCount,
@@ -275,6 +309,7 @@ function fireworkConfetti() {
                 y: Math.random() - 0.2
             }
         });
+
     }, 250);
 }
 
@@ -283,21 +318,23 @@ function fireworkConfetti() {
 // SCOREBOARD DRAG FUNCTIONS
 // =========================
 function startDrag(e) {
-    isDragging = true;
+    isDragging = true; // start drag
 
     const rect = scoreboard.getBoundingClientRect();
-    offsetX = e.clientX - rect.left;
+
+    offsetX = e.clientX - rect.left; // calculate offset
     offsetY = e.clientY - rect.top;
 }
 
 function drag(e) {
     if (!isDragging) return;
 
+    // move element
     scoreboard.style.left = (e.clientX - offsetX) + "px";
     scoreboard.style.top = (e.clientY - offsetY) + "px";
     scoreboard.style.transform = "none";
 }
 
 function stopDrag() {
-    isDragging = false;
+    isDragging = false; // stop drag
 }
