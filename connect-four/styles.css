@@ -1,5 +1,6 @@
-/* Background styling */
-
+/* ========================== */
+/*        BG Styling          */
+/* ========================== */
 html {
     background-image: url("concrete-wall.png");
     background-color: #f0ede4;
@@ -20,8 +21,9 @@ h1 {
 }
 
 
-/* Header Wave Styling */
-
+/* ========================== */
+/*            Wave            */
+/* ========================== */
 .box {
     background: #5F8575;
     position: relative;
@@ -30,6 +32,9 @@ h1 {
     height: 112px;
     width: 100%;
 
+    /*Cutting a wave shape using circles 
+    Controls what is visibile (#000) and not (#0000)
+    Repeat-x repeats horizontally*/
     mask:
         radial-gradient(100px at 50% calc(100% - 100px), #000 99%, #0000 101%) calc(50% - 60px) 0 / 120px 100%,
         radial-gradient(64px at 50% calc(100% + 60px), #0000 99%, #000 101%) 50% calc(100% - 6.5px) / 120px 100% repeat-x;
@@ -37,50 +42,58 @@ h1 {
 
 .box2 {
     background-image: url("concrete-wall.png");
-    background-color: #f0ede4; 
+    background-color: #f0ede4;
     position: relative;
     z-index: 3;
     height: 108px;
-    width: 100%; 
+    width: 100%;
     margin-top: 0;
 
+    /* Using this to create an underline effect, 
+    same colour/pattern as background to give the transparent effect */
     mask:
         radial-gradient(100px at 50% calc(100% - 100px), #000 99%, #0000 101%) calc(50% - 60px) 0 / 120px 100%,
         radial-gradient(64px at 50% calc(100% + 60px), #0000 99%, #000 101%) 50% calc(100% - 6.5px) / 120px 100% repeat-x;
 }
 
 
-/* ------------------------------------------------- */
-/* Connect four grid styling */
+/* ========================== */
+/*       Grid Styling         */
+/* ========================== */
 
+/* Main grid, sets width and height */
 .grid {
     width: 595px;
     height: 400px;
     position: relative;
     margin: 40px auto;
     padding: 30px;
-    background: rgba(95,133,117, 0.7);
+    background: rgba(95, 133, 117, 0.7);
     border-radius: 7%;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
 
+/* Where the discs drop into and sit */
 .disc-layer {
     position: absolute;
-    inset: 32px; 
+    inset: 32px;
     z-index: 1;
     pointer-events: none;
 }
 
+/* Front of grid where the cells/holes are. 
+Encases the discs*/
 .grid-front {
     position: absolute;
-    inset: 30px; 
+    inset: 30px;
     z-index: 2;
     display: grid;
     grid-template-columns: repeat(7, 85px);
     grid-template-rows: repeat(5, 80px);
 }
 
+/* Individual grid cells, made circular */
 .cell {
     width: 75px;
     height: 75px;
@@ -92,15 +105,19 @@ h1 {
     border: 2px solid #436357;
 }
 
+/* Hover animation styling 
+Pointer cursor makes UX nice*/
 .hover-col {
-    background-color: rgba(95,133,117, 0.8);
+    background-color: rgba(95, 133, 117, 0.8);
     cursor: pointer;
 }
 
 
-/* ------------------------------------------------- */
-/* Disc styling */
+/* ========================== */
+/*        Disc Styling        */
+/* ========================== */
 
+/* Tranisiton goes hand-in-hand with keyframes drop */
 .disc {
     position: absolute;
     width: 75px;
@@ -108,7 +125,7 @@ h1 {
     z-index: 1;
     border-radius: 50%;
     box-sizing: border-box;
-    border: 2px solid rgba(0,0,0,0.15);
+    border: 2px solid rgba(0, 0, 0, 0.15);
     transition: top 0.8s ease;
 }
 
@@ -120,16 +137,19 @@ h1 {
     background: #FFFF8F;
 }
 
+/* Disc drop animation,
+creates falling effect, starts above designated spot*/
 @keyframes drop {
     from {
         transform: translateY(-40px);
     }
+
     to {
         transform: translateY(0);
     }
 }
 
 
-/* ------------------------------------------------- */
-/*  styling */
-
+/* ========================== */
+/*     Scoreboard Styling     */
+/* ========================== */
