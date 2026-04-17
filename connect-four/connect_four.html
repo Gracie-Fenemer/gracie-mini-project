@@ -18,47 +18,88 @@
         <div class="disc-layer" id="disc-layer"></div>
 
         <div class="grid-front" id="grid">
-            <div class="cell" data-col="0" data-row="0"></div>
-            <div class="cell" data-col="1" data-row="0"></div>
-            <div class="cell" data-col="2" data-row="0"></div>
-            <div class="cell" data-col="3" data-row="0"></div>
-            <div class="cell" data-col="4" data-row="0"></div>
-            <div class="cell" data-col="5" data-row="0"></div>
-            <div class="cell" data-col="6" data-row="0"></div>
-            
-            <div class="cell" data-col="0" data-row="1"></div>
-            <div class="cell" data-col="1" data-row="1"></div>
-            <div class="cell" data-col="2" data-row="1"></div>
-            <div class="cell" data-col="3" data-row="1"></div>
-            <div class="cell" data-col="4" data-row="1"></div>
-            <div class="cell" data-col="5" data-row="1"></div>
-            <div class="cell" data-col="6" data-row="1"></div>
+            <!-- Row 1 from top -->
+            <div class="cell" id="0_0" data-col="0" data-row="0"></div>
+            <div class="cell" id="1_0" data-col="1" data-row="0"></div>
+            <div class="cell" id="2_0" data-col="2" data-row="0"></div>
+            <div class="cell" id="3_0" data-col="3" data-row="0"></div>
+            <div class="cell" id="4_0" data-col="4" data-row="0"></div>
+            <div class="cell" id="5_0" data-col="5" data-row="0"></div>
+            <div class="cell" id="6_0" data-col="6" data-row="0"></div>
 
-            <div class="cell" data-col="0" data-row="2"></div>
-            <div class="cell" data-col="1" data-row="2"></div>
-            <div class="cell" data-col="2" data-row="2"></div>
-            <div class="cell" data-col="3" data-row="2"></div>
-            <div class="cell" data-col="4" data-row="2"></div>
-            <div class="cell" data-col="5" data-row="2"></div>
-            <div class="cell" data-col="6" data-row="2"></div>
+            <!-- Row 2 -->
+            <div class="cell" id="0_1" data-col="0" data-row="1"></div>
+            <div class="cell" id="1_1" data-col="1" data-row="1"></div>
+            <div class="cell" id="2_1" data-col="2" data-row="1"></div>
+            <div class="cell" id="3_1" data-col="3" data-row="1"></div>
+            <div class="cell" id="4_1" data-col="4" data-row="1"></div>
+            <div class="cell" id="5_1" data-col="5" data-row="1"></div>
+            <div class="cell" id="6_1" data-col="6" data-row="1"></div>
 
-            <div class="cell" data-col="0" data-row="3"></div>
-            <div class="cell" data-col="1" data-row="3"></div>
-            <div class="cell" data-col="2" data-row="3"></div>
-            <div class="cell" data-col="3" data-row="3"></div>
-            <div class="cell" data-col="4" data-row="3"></div>
-            <div class="cell" data-col="5" data-row="3"></div>
-            <div class="cell" data-col="6" data-row="3"></div>
+            <!-- Row 3 -->
+            <div class="cell" id="0_2" data-col="0" data-row="2"></div>
+            <div class="cell" id="1_2" data-col="1" data-row="2"></div>
+            <div class="cell" id="2_2" data-col="2" data-row="2"></div>
+            <div class="cell" id="3_2" data-col="3" data-row="2"></div>
+            <div class="cell" id="4_2" data-col="4" data-row="2"></div>
+            <div class="cell" id="5_2" data-col="5" data-row="2"></div>
+            <div class="cell" id="6_2" data-col="6" data-row="2"></div>
 
-            <div class="cell" data-col="0" data-row="4"></div>
-            <div class="cell" data-col="1" data-row="4"></div>
-            <div class="cell" data-col="2" data-row="4"></div>
-            <div class="cell" data-col="3" data-row="4"></div>
-            <div class="cell" data-col="4" data-row="4"></div>
-            <div class="cell" data-col="5" data-row="4"></div>
-            <div class="cell" data-col="6" data-row="4"></div>
+            <!-- Row 4 -->
+            <div class="cell" id="0_3" data-col="0" data-row="3"></div>
+            <div class="cell" id="1_3" data-col="1" data-row="3"></div>
+            <div class="cell" id="2_3" data-col="2" data-row="3"></div>
+            <div class="cell" id="3_3" data-col="3" data-row="3"></div>
+            <div class="cell" id="4_3" data-col="4" data-row="3"></div>
+            <div class="cell" id="5_3" data-col="5" data-row="3"></div>
+            <div class="cell" id="6_3" data-col="6" data-row="3"></div>
+
+            <!-- Row 5 -->
+            <div class="cell" id="0_4" data-col="0" data-row="4"></div>
+            <div class="cell" id="1_4" data-col="1" data-row="4"></div>
+            <div class="cell" id="2_4" data-col="2" data-row="4"></div>
+            <div class="cell" id="3_4" data-col="3" data-row="4"></div>
+            <div class="cell" id="4_4" data-col="4" data-row="4"></div>
+            <div class="cell" id="5_4" data-col="5" data-row="4"></div>
+            <div class="cell" id="6_4" data-col="6" data-row="4"></div>
         </div>
     </div>
+
+    <div id="playerInput">
+        <form id="playerForm">
+            Red Player name:
+            <input type="text" id="redPlayerName" name="redPlayerName"> 
+            
+            <br> <br> 
+
+            Yellow Player name:
+            <input  type="text" id="yellowPlayerName" name="yellowPlayerName">
+            
+             <br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="scoreboard">
+        <div id="scoreboardHeader">Score</div>
+
+        <div class="score">
+            <p id="redPlayerLabel">Red</p>
+            <span id="playerRed">0</span>
+        </div>
+
+        <div class="score">
+            <p id="yellowPlayerLabel">Yellow</p>
+            <span id="playerYellow">0</span>
+        </div>
+        <div class="score-buttons">
+            <button id="resetScore" onclick="resetScore()">Reset</button>
+            <button id="changePlayersBtn">Change Players</button>
+        </div>
+    </div>
+
+    <button id="restart" onclick="restartGame()">Restart Game</button>
 
     <script src="connect_four.js"></script>
 </body>
