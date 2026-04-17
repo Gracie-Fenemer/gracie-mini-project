@@ -125,7 +125,8 @@ h1 {
     margin-right: auto;
     background-color: #FFF5EE;
     color: #E0BFB8;
-    border: 2px solid #E0BFB8;
+    border: 10px solid #E0BFB8;
+    border-radius: 5%;
     display: grid;
     grid-template-columns: 130px 130px 130px;
     grid-template-rows: 120px 120px 120px;

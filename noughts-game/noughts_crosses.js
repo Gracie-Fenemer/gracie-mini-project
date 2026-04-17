@@ -25,9 +25,9 @@ let offsetY = 0; // mouse offset Y
 let isDragging = false; // dragging state
 
 
-// =========================
+// =============================
 // PAGE SETUP / EVENT LISTENERS
-// =========================
+// =============================
 document.addEventListener("DOMContentLoaded", () => {
 
     // form submit
@@ -72,25 +72,25 @@ function playerNameInput() {
     document.getElementById("playerXName").value = savedX;
     document.getElementById("playerOName").value = savedO;
 
-    popup.classList.add("open-popup"); // show popup
+    popup.classList.add("open-popup"); 
 }
 
 function closePopup() {
-    popup.classList.remove("open-popup"); // hide popup
+    popup.classList.remove("open-popup"); 
 }
 
 function savePlayerNames(e) {
     e.preventDefault(); // stop reload
 
-    // get input values
+    // Get input values
     const playerX = document.getElementById("playerXName").value || "Player X";
     const playerO = document.getElementById("playerOName").value || "Player O";
 
-    // update labels
+    // Update labels
     document.getElementById("playerXLabel").textContent = playerX;
     document.getElementById("playerOLabel").textContent = playerO;
 
-    // save to storage
+    // Save to storage
     localStorage.setItem("playerXName", playerX);
     localStorage.setItem("playerOName", playerO);
 
@@ -99,7 +99,7 @@ function savePlayerNames(e) {
 
 function loadPlayerNames() {
 
-    // load names (or default)
+    // Load names (or default)
     const playerX = localStorage.getItem("playerXName") || "Player X";
     const playerO = localStorage.getItem("playerOName") || "Player O";
 
@@ -135,35 +135,36 @@ function resetScore() {
 // =========================
 function place(box) {
 
-    // ignore if filled or game ended
+    // Ignores if filled or game ended (doesn't allow play if won)
     if (box.innerText !== "" || won) return;
 
-    box.innerText = currentPlayer; // place move
+    // Place move
+    box.innerText = currentPlayer; 
 
-    // small animation
     box.classList.add("pulse");
     setTimeout(() => box.classList.remove("pulse"), 400);
 
-    // switch player
+    // Switch player
     currentPlayer = currentPlayer === "O" ? "X" : "O";
 
-    checkGameBoard(); // check win
-    checkDraw(); // check draw
-    showNextPlayerMessage(); // show message
+    checkGameBoard(); 
+    checkDraw(); 
+    showNextPlayerMessage(); 
 }
 
 function restartGame() {
-    currentPlayer = "O"; // reset player
-    won = false; // reset state
+    currentPlayer = "O"; 
+    won = false; 
 
-    // clear board
+    // Clear board
     for (let i = 0; i <= 2; i++) {
         for (let j = 0; j <= 2; j++) {
             document.getElementById(i + "_" + j).innerText = "";
         }
     }
 
-    document.getElementById("message").style.display = "none"; // hide message
+    // Hides message
+    document.getElementById("message").style.display = "none"; 
 }
 
 
@@ -253,7 +254,7 @@ function showNextPlayerMessage() {
 
     setTimeout(() => {
         msg.style.display = "none"; // hide after delay
-    }, 1000);
+    }, 500);
 }
 
 
